@@ -1,0 +1,90 @@
+---
+import type { PortfolioCopy } from "../../i18n/es";
+
+interface Props {
+  copy: Pick<PortfolioCopy,
+    | "contactEyebrow"
+    | "contactTitle"
+    | "contactText"
+    | "linkedin"
+  >;
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="contact section-shell section-block" id="contact" aria-labelledby="contact-title">
+  <div class="contact-panel">
+    <div>
+      <p class="eyebrow">{copy.contactEyebrow}</p>
+      <h2 id="contact-title">{copy.contactTitle}</h2>
+      <p>{copy.contactText}</p>
+    </div>
+    <a class="button button-primary" href="https://www.linkedin.com/in/harry-cobos-rivera-93065a314/" target="_blank" rel="noreferrer">
+      {copy.linkedin}<span aria-hidden="true">↗</span>
+    </a>
+    <span class="contact-decoration" aria-hidden="true">HC</span>
+  </div>
+</section>
+
+<style>
+  @media (width > 620px) {
+    .contact {
+      padding-bottom: 4rem;
+    }
+  }
+
+  .contact-panel {
+    position: relative;
+    display: flex;
+    min-height: 260px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    border: 1px solid rgba(255, 186, 82, 0.2);
+    border-radius: 1rem;
+    background:
+      radial-gradient(ellipse at 88% 40%, rgba(137, 71, 150, 0.23), transparent 24rem),
+      linear-gradient(120deg, rgba(39, 31, 43, 0.94), rgba(23, 21, 31, 0.94));
+  }
+
+  .contact-panel h2 {
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-panel p:not(.eyebrow) {
+    max-width: 480px;
+    margin-bottom: 0;
+    color: var(--muted);
+  }
+
+  .contact-panel .button {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+  }
+
+  .contact-decoration {
+    position: absolute;
+    right: 10%;
+    bottom: -5.7rem;
+    color: rgba(255, 255, 255, 0.025);
+    font-size: 16rem;
+    font-weight: 850;
+    letter-spacing: -0.12em;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  @media (max-width: 620px) {
+    .contact-panel {
+      align-items: flex-start;
+      flex-direction: column;
+      min-height: 320px;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+  }
+</style>

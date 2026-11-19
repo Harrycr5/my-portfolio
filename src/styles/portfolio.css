@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  --background: #100e18;
+  --text: #f3f0f7;
+  --muted: #a7a1b3;
+  --soft: #777183;
+  --accent: #ffba52;
+  --accent-bright: #ffd18a;
+  --line: rgba(238, 230, 249, 0.12);
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 82% 16%, rgba(114, 55, 134, 0.2), transparent 34rem),
+    radial-gradient(ellipse at 12% 36%, rgba(93, 49, 112, 0.14), transparent 32rem),
+    var(--background);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.navigation,
+.section-shell {
+  width: min(1120px, calc(100% - 3rem));
+  margin-inline: auto;
+}
+
+.wordmark {
+  color: var(--text);
+  font-size: 1.45rem;
+  font-weight: 850;
+  letter-spacing: -0.1em;
+}
+
+.wordmark span {
+  color: var(--accent);
+}
+
+.eyebrow {
+  margin: 0 0 1.1rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  color: #17121c;
+  background: var(--accent);
+}
+
+.button-primary:hover {
+  background: var(--accent-bright);
+}
+
+.section-block {
+  padding-block: 5rem;
+  border-top: 1px solid var(--line);
+}
+
+h2 {
+  max-width: 620px;
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 1.15;
+}
+
+.section-intro {
+  max-width: 400px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+@media (max-width: 620px) {
+  .navigation,
+  .section-shell {
+    width: min(100% - 2rem, 480px);
+  }
+
+  .section-block {
+    padding-block: 3.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,100 @@
+---
+import type { PortfolioCopy } from "../../i18n/es";
+
+interface Props {
+  copy: Pick<PortfolioCopy,
+    | "stackEyebrow"
+    | "stackTitle"
+    | "stackIntro"
+  >;
+  base: string;
+}
+
+const { copy, base } = Astro.props;
+
+const technologies = [
+  { name: "Python", icon: "python" },
+  { name: "Django", icon: "django" },
+  { name: "FastAPI", icon: "fastapi" },
+  { name: "Vue.js", icon: "vue" },
+  { name: "React", icon: "react" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "PostgreSQL", icon: "postgresql" },
+  { name: "Docker", icon: "docker" },
+  { name: "Postman", icon: "postman" },
+  { name: "DBeaver", icon: "dbeaver" },
+  { name: "Git", icon: "git" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "VS Code", icon: "vscode" },
+  { name: "Redis", icon: "redis" },
+  { name: "Astro", icon: "astro" },
+  { name: "Tailwind CSS", icon: "tailwind" },
+];
+---
+
+<section class="stack section-shell section-block" id="stack" aria-labelledby="stack-title">
+  <div class="section-heading">
+    <p class="eyebrow">{copy.stackEyebrow}</p>
+    <h2 id="stack-title">{copy.stackTitle}</h2>
+    <p class="section-intro">{copy.stackIntro}</p>
+  </div>
+  <ul class="technology-list">
+    {technologies.map((technology) => (
+      <li>
+        <img
+          src={`${base}images/webp/${technology.icon}.webp`}
+          alt=""
+          width="40"
+          height="40"
+          loading="lazy"
+        />
+        <span>{technology.name}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .stack .section-heading {
+    margin-bottom: 2rem;
+  }
+
+  .stack .section-intro {
+    margin-top: 0.9rem;
+  }
+
+  .technology-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .technology-list li {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: rgba(25, 22, 35, 0.62);
+    color: #e2dce8;
+    font-size: 0.85rem;
+  }
+
+  .technology-list img {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+  }
+
+  @media (max-width: 620px) {
+    .technology-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

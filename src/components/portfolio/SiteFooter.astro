@@ -1,0 +1,63 @@
+---
+import type { PortfolioCopy } from "../../i18n/es";
+
+interface Props {
+  copy: Pick<PortfolioCopy,
+    | "footer"
+    | "backToTop"
+  >;
+  base: string;
+}
+
+const { copy, base } = Astro.props;
+---
+
+<footer class="site-footer section-shell">
+  <a class="wordmark footer-mark" href={base}>HC<span>.</span></a>
+  <p>{copy.footer}</p>
+  <a href="#main">{copy.backToTop}</a>
+</footer>
+
+<style>
+  .site-footer a:hover {
+    color: var(--accent);
+  }
+
+  .site-footer {
+    display: flex;
+    min-height: 92px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.76rem;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  .site-footer a {
+    transition: color 160ms ease;
+  }
+
+  .footer-mark {
+    color: var(--text);
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 620px) {
+    .site-footer {
+      min-height: 82px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding-block: 1rem;
+    }
+
+    .site-footer p {
+      order: 1;
+      width: 100%;
+    }
+  }
+</style>

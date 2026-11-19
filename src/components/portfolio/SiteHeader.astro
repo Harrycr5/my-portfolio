@@ -1,0 +1,103 @@
+---
+import type { PortfolioCopy } from "../../i18n/es";
+
+interface Props {
+  copy: Pick<PortfolioCopy,
+    | "navigationLabel"
+    | "navAbout"
+    | "navExperience"
+    | "navProjects"
+    | "navStack"
+    | "navContact"
+    | "switchLanguage"
+    | "switchLabel"
+  >;
+  base: string;
+  english: boolean;
+}
+
+const { copy, base, english } = Astro.props;
+---
+
+<header class="site-header">
+  <nav class="navigation" aria-label={copy.navigationLabel}>
+    <a class="wordmark" href={base} aria-label="Harry Cobos, home">HC<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">{copy.navAbout}</a>
+      <a href="#experience">{copy.navExperience}</a>
+      <a href="#projects">{copy.navProjects}</a>
+      <a href="#stack">{copy.navStack}</a>
+      <a href="#contact">{copy.navContact}</a>
+      <a class="language-link" href={english ? base : `${base}en/`} lang={english ? "es" : "en"} aria-label={copy.switchLanguage}>
+        {copy.switchLabel}
+      </a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    border-bottom: 1px solid var(--line);
+    background: rgba(16, 14, 24, 0.82);
+    backdrop-filter: blur(18px);
+  }
+
+  .navigation {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.2rem);
+    color: #d0cbd8;
+    font-size: 0.9rem;
+  }
+
+  .nav-links a:not(.language-link) {
+    transition: color 160ms ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  .language-link {
+    display: grid;
+    width: 2.35rem;
+    height: 2.35rem;
+    place-items: center;
+    border: 1px solid rgba(255, 186, 82, 0.44);
+    border-radius: 50%;
+    color: var(--accent-bright);
+    font-size: 0.74rem;
+    font-weight: 750;
+  }
+
+  @media (max-width: 620px) {
+    .navigation {
+      min-height: 68px;
+    }
+
+    .nav-links {
+      gap: 0.85rem;
+      font-size: 0.75rem;
+    }
+
+    .nav-links a:nth-child(3),
+    .nav-links a:nth-child(4) {
+      display: none;
+    }
+
+    .language-link {
+      width: 2.15rem;
+      height: 2.15rem;
+    }
+  }
+</style>

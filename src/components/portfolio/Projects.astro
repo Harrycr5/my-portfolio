@@ -1,0 +1,331 @@
+---
+import type { PortfolioCopy } from "../../i18n/es";
+
+interface Props {
+  copy: Pick<PortfolioCopy,
+    | "projectsEyebrow"
+    | "projectsTitle"
+    | "projectsIntro"
+    | "projectTagsLabel"
+    | "savingsType"
+    | "savingsDescription"
+    | "savingsFront"
+    | "savingsBack"
+    | "starterType"
+    | "starterDescription"
+    | "viewRepo"
+    | "fortniteType"
+    | "fortniteDescription"
+  >;
+}
+
+const { copy } = Astro.props;
+
+const projects = [
+  {
+    number: "01",
+    type: copy.savingsType,
+    title: "My Savings",
+    description: copy.savingsDescription,
+    tags: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
+    links: [
+      {
+        label: copy.savingsFront,
+        href: "https://github.com/Harrycr5/my-savings-frontend",
+      },
+      {
+        label: copy.savingsBack,
+        href: "https://github.com/Harrycr5/my-savings-backend",
+      },
+    ],
+  },
+  {
+    number: "02",
+    type: copy.starterType,
+    title: "FastAPI Starter Pack",
+    description: copy.starterDescription,
+    className: "starter",
+    tags: ["Python", "FastAPI", "PostgreSQL"],
+    links: [
+      {
+        label: copy.viewRepo,
+        href: "https://github.com/Harrycr5/fastapi-starter-pack",
+      },
+    ],
+  },
+  {
+    number: "03",
+    type: copy.fortniteType,
+    title: "Fortnite Frontend",
+    description: copy.fortniteDescription,
+    className: "fortnite",
+    tags: ["TypeScript", "Frontend", "API"],
+    links: [
+      {
+        label: copy.viewRepo,
+        href: "https://github.com/Harrycr5/fortnite-frontend-website",
+      },
+    ],
+  },
+];
+---
+
+<section class="section-shell section-block" id="projects" aria-labelledby="projects-title">
+  <div class="projects-heading">
+    <div>
+      <p class="eyebrow">{copy.projectsEyebrow}</p>
+      <h2 id="projects-title">{copy.projectsTitle}</h2>
+    </div>
+    <p class="section-intro">{copy.projectsIntro}</p>
+  </div>
+  <div class="project-grid">
+    {projects.map((project) => (
+      <article class:list={["project-card", project.className]}>
+        <div class="project-visual" aria-hidden="true">
+          <span class="project-number">{project.number}</span>
+          <div class="visual-window">
+            <span class="window-dots"><i></i><i></i><i></i></span>
+            <span class="visual-line visual-line-long"></span>
+            <span class="visual-line"></span>
+            <span class="visual-block"></span>
+          </div>
+          <span class="visual-orb"></span>
+        </div>
+        <div class="project-body">
+          <p class="project-type">{project.type}</p>
+          <h3>{project.title}</h3>
+          <p class="project-description">{project.description}</p>
+          <ul class="tag-list" aria-label={copy.projectTagsLabel}>
+            {project.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+          <div class="project-links">
+            {project.links.map((link) => (
+              <a href={link.href} target="_blank" rel="noreferrer">
+                {link.label}<span aria-hidden="true"> ↗</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .project-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: rgba(25, 22, 35, 0.76);
+    transition: transform 180ms ease, border-color 180ms ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 186, 82, 0.37);
+  }
+
+  .project-visual {
+    position: relative;
+    display: flex;
+    height: 175px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #332236, #1d1b2b 62%, #161721);
+  }
+
+  .starter .project-visual {
+    background: linear-gradient(135deg, #292a3a, #1b2030 62%, #171622);
+  }
+
+  .fortnite .project-visual {
+    background: linear-gradient(135deg, #352c26, #272131 60%, #161622);
+  }
+
+  .project-number {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.9rem;
+    color: rgba(247, 239, 251, 0.56);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .visual-window {
+    position: relative;
+    display: flex;
+    width: 67%;
+    height: 84px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.8rem;
+    border: 1px solid rgba(241, 229, 248, 0.23);
+    border-radius: 0.55rem;
+    background: rgba(18, 17, 26, 0.65);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    transform: rotate(-4deg);
+  }
+
+  .window-dots {
+    position: absolute;
+    top: 0.45rem;
+    left: 0.55rem;
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .window-dots i {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(242, 233, 248, 0.34);
+  }
+
+  .visual-line {
+    width: 45%;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(255, 186, 82, 0.48);
+  }
+
+  .visual-line-long {
+    width: 70%;
+    margin-top: 0.5rem;
+    background: rgba(238, 228, 246, 0.64);
+  }
+
+  .visual-block {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.8rem;
+    width: 24%;
+    height: 28px;
+    border-radius: 0.25rem;
+    background: linear-gradient(145deg, rgba(179, 105, 191, 0.64), rgba(255, 186, 82, 0.46));
+  }
+
+  .visual-orb {
+    position: absolute;
+    right: 13%;
+    bottom: 9%;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: 1px solid rgba(255, 186, 82, 0.27);
+    border-radius: 50%;
+  }
+
+  .project-body {
+    padding: 1.2rem;
+  }
+
+  .project-type {
+    margin-bottom: 0.55rem;
+    color: var(--accent);
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+  }
+
+  .project-body h3 {
+    margin-bottom: 0.65rem;
+    font-size: 1.16rem;
+    letter-spacing: -0.025em;
+  }
+
+  .project-description {
+    min-height: 5.4rem;
+    margin-bottom: 1rem;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 1.1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tag-list li {
+    padding: 0.22rem 0.48rem;
+    border: 1px solid rgba(232, 224, 242, 0.12);
+    border-radius: 99px;
+    color: #c5bfce;
+    font-size: 0.65rem;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.9rem;
+  }
+
+  .project-links a {
+    color: #eee8f3;
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  .project-links a:hover {
+    color: var(--accent);
+  }
+
+  .project-links span {
+    color: var(--accent);
+  }
+
+  @media (max-width: 820px) {
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-card:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .project-card:last-child .project-description {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .projects-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-card:last-child {
+      grid-column: auto;
+    }
+
+    .project-description {
+      min-height: 0;
+    }
+  }
+</style>
